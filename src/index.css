@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* ここに「くすみカラー」の設定を直接書いちゃいます */
+@theme {
+  /* メインカラー */
+  --color-aizu-white: #f9f9f9;
+  --color-aizu-gray: #333333;
+  --color-aizu-sub: #777777;
+
+  /* アクセントカラー（くすみカラー） */
+  --color-kusumi-blue: #87a7b3;
+  --color-kusumi-green: #a7b896;
+  --color-kusumi-pink: #c5a3a1;
+
+  /* フォントの設定も追加しておくと便利です */
+  --font-serif: "Noto Serif JP", serif;
+}
+
+body {
+  background-color: var(--color-aizu-white);
+  color: var(--color-aizu-gray);
+}
