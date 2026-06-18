@@ -17,6 +17,13 @@
   }
 }
 
+.prose {
+  text-align: justify;
+  text-justify: inter-character;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 .hero {
   position: relative;
 
@@ -167,7 +174,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;

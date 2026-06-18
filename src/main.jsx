@@ -5,7 +5,10 @@ import "./index.css";
 import Header from "./components/header.jsx";
 import Home from "./pages/home.jsx"; // App から Home に名前を分かりやすく変更
 import Blog from "./pages/blog.jsx";
+import Map from "./pages/map.jsx"
+import Mitinori from "./pages/route.jsx"
 import Footer from "./components/footer.jsx";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,9 +19,13 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         {/* トップページ */}
         <Route path="/" element={<Home />} />
+        
 
         {/* ブログ詳細ページ（:id 部分にファイル名が入る） */}
         <Route path="/blog/:id" element={<Blog />} />
+
+        <Route path="/map" element={<Map />} />
+        <Route path="/route" element={<Mitinori />} />
       </Routes>
 
       {/* 全ページ共通のフッター */}
