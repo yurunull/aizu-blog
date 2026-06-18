@@ -36,7 +36,8 @@
     "globals": "^17.4.0",
     "postcss": "^8.5.9",
     "tailwindcss": "^4.2.2",
-    "vite": "^8.0.4"
+    "vite": "^8.0.4",
+    "vite-plugin-markdown": "^2.2.0"
   },
   "pnpm": {
     "minimumReleaseAgeExclude": [
