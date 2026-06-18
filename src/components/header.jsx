@@ -34,7 +34,7 @@ export default function Header() {
       className="block h-full w-32 md:w-48 transition-opacity hover:opacity-70 flex-shrink-0"
     >
       <img
-        src="/images/logo.png"
+        src={`${import.meta.env.BASE_URL}images/logo.png`}
         alt="BURARI 会津手帖"
         /* h-full: ヘッダーの高さに合わせる
            object-cover: 枠からはみ出す分をカットして埋める

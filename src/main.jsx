@@ -12,7 +12,7 @@ import Footer from "./components/footer.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       {/* 全ページ共通のヘッダー */}
       <Header />
 

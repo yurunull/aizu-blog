@@ -2,7 +2,7 @@
 date: 2025.12.10
 title: "ランチもカフェも欲張りたい！"
 locationName: "こぐま亭"
-images: "/images/kogumatei1.jpg|ワンプレートランチ, /images/kogumatei2.jpg|濃厚ソフトクリーム, /images/kogumatei3.jpg|カフェタイムでのガトーショコラ"
+images: "images/kogumatei1.jpg|ワンプレートランチ, images/kogumatei2.jpg|濃厚ソフトクリーム, images/kogumatei3.jpg|カフェタイムでのガトーショコラ"
 # links (複数形) にして、名前|URL の形式にする
 links: "Instagram|https://www.instagram.com/kogumatei_polaris?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
 mapUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2710.6864501820173!2d139.92576377357543!3d37.498191145853525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff5530041b69e23%3A0x3ed1496629543454!2z44GT44GQ44G-5Lqt!5e0!3m2!1sja!2sjp!4v1776647168486!5m2!1sja!2sjp

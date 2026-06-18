@@ -2,7 +2,7 @@
 date: 2025.01.19
 title: "バラに囲まれた隠れカフェ"
 locationName: "カフェ ケイキ(cafe KEI-KI)"
-images: "/images/KEI-KI.jpg|"
+images: "images/KEI-KI.jpg|"
 # links (複数形) にして、名前|URL の形式にする
 # Googleマップの「共有」→「地図を埋め込む」の src の中身を入れる
 mapUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25324.362068706727!2d139.90541283955068!3d37.4950561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff553602280e3b9%3A0xdbc406768685e105!2sCAFE%20KEI-KI!5e0!3m2!1sja!2sjp!4v1781757475740!5m2!1sja!2sjp"
