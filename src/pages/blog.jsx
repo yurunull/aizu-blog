@@ -35,17 +35,17 @@ export default function BlogPage() {
   // ✨ どんなデータが来ても安全に文字列化してBudouxに通すコンポーネント
   const BudouxText = ({ text }) => {
     if (!text) return null;
-    
+
     // 配列やオブジェクトが混ざってきた場合を想定し、安全に文字列（プレーンテキスト）へと変換
-    const safeText = Array.isArray(text) 
-      ? text.join("") 
-      : typeof text === "object" 
-        ? text.toString() 
+    const safeText = Array.isArray(text)
+      ? text.join("")
+      : typeof text === "object"
+        ? text.toString()
         : String(text);
 
     // 空っぽ、または実体のない文字列なら何も出力しない（エラー防止）
     if (!safeText || safeText.trim() === "" || safeText === "[object Object]") {
-      return <>{text}</>; 
+      return <>{text}</>;
     }
 
     try {
@@ -62,7 +62,7 @@ export default function BlogPage() {
 
   // 2. Markdownパースロジック（imagesに対応）
   const parseMarkdown = (raw) => {
-const metaMatch = raw?.match?.(/^---\s*([\s\S]*?)\s*---/);
+    const metaMatch = raw?.match?.(/^---\s*([\s\S]*?)\s*---/);
     const metaData = {
       date: "",
       title: "",
@@ -125,7 +125,7 @@ const metaMatch = raw?.match?.(/^---\s*([\s\S]*?)\s*---/);
         const contentStr = isString ? children : (Array.isArray(children) && typeof children[0] === "string" ? children[0] : "");
 
         // 本文中に {image:0} などの記述があれば画像に置換
-        if (contentStr.match(/^{image:\d+}$/)) {
+        if (contentStr?.match?.(/^{image:\d+}$/)) {
           const index = parseInt(contentStr.match(/\d+/)[0]);
           const img = gallery[index];
           if (!img) return null;
@@ -146,7 +146,7 @@ const metaMatch = raw?.match?.(/^---\s*([\s\S]*?)\s*---/);
             </figure>
           );
         }
-        
+
         // 通常の文章段落
         return (
           <p className="mb-10 last:mb-0">
