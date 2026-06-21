@@ -118,17 +118,17 @@ export default function Home() {
   return (
     <div className="bg-aizu-white min-h-screen">
       {/* 1. メインビジュアル */}
-      <main className="min-h-[35vh] w-full flex justify-center relative pt-12 md:pt-24">
+      <main className="min-h-[80vh] w-full flex justify-center relative pt-12 md:pt-24">
         <div className="relative">
           <h2
             className="font-serif font-extralight text-aizu-gray"
             style={{
               writingMode: "vertical-rl",
               textOrientation: "mixed",
-              lineHeight: "5.0",
+              lineHeight: "1.5",
             }}
           >
-            <div className="text-4xl md:text-[6.5rem] drop-shadow-sm flex flex-col items-start">
+            <div className="text-4xl md:text-[5rem] drop-shadow-sm tracking-[0.3em] h-full flex flex-row-reverse items-start gap-x-8 md:gap-x-16">
               <span className="tracking-[0.3em] mb-8 md:mb-16">
                 <BudouxText text="ゆるり、" />
               </span>
@@ -251,8 +251,8 @@ export default function Home() {
                   key={page}
                   onClick={() => setCurrentPage(page)}
                   className={`w-8 h-8 rounded-full text-xs tracking-widest transition-all ${currentPage === page
-                      ? "bg-kusumi-blue text-white"
-                      : "text-aizu-sub hover:bg-gray-50"
+                    ? "bg-kusumi-blue text-white"
+                    : "text-aizu-sub hover:bg-gray-50"
                     }`}
                 >
                   {page}
