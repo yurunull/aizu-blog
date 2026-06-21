@@ -4,7 +4,7 @@ import { plugin as markdown } from "vite-plugin-markdown";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/aizu-blog/', 
+  base: '/AizuBlog/', 
   plugins: [
     react(),
     markdown({ mode: ['html', 'toc'] })
