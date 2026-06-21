@@ -115,31 +115,30 @@ export default function Home() {
     );
   };
 
-  return (
+ return (
     <div className="bg-aizu-white min-h-screen">
-      {/* 1. メインビジュアル */}
-      <main className="min-h-[80vh] w-full flex justify-center relative pt-12 md:pt-24">
-        <div className="relative">
-          <h2
-            className="font-serif font-extralight text-aizu-gray"
-            style={{
-              writingMode: "vertical-rl",
-              textOrientation: "mixed",
-              lineHeight: "1.5",
-            }}
-          >
-            <div className="text-4xl md:text-[5rem] drop-shadow-sm tracking-[0.3em] h-full flex flex-row-reverse items-start gap-x-8 md:gap-x-16">
-              <span className="tracking-[0.3em] mb-8 md:mb-16">
-                <BudouxText text="ゆるり、" />
-              </span>
-              <span className="tracking-[0.3em] mb-8 md:mb-16">
-                <BudouxText text="ぶらりと、" />
-              </span>
-              <span className="tracking-[0.3em]">
-                <BudouxText text="会津手帖。" />
-              </span>
-            </div>
-          </h2>
+      {/* 1. メインビジュアル (PCでのサイズ拡大・位置ズレの完全修正) */}
+      <main className="h-[75vh] min-h-[550px] w-full flex justify-center items-center relative pt-12">
+        <div 
+          className="font-serif font-extralight text-aizu-gray tracking-[0.3em] relative"
+          style={{
+            writingMode: "vertical-rl",
+            textOrientation: "mixed",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {/* PC（md以上）でのサイズを [4.8rem] まで大きく確保！
+            flexを使わず、各要素の margin-top (mt) で完璧に階段状のスタート位置を制御します
+          */}
+          <div className="text-4xl md:text-[4.8rem] block leading-none">
+            ゆるり、
+          </div>
+          <div className="text-4xl md:text-[4.8rem] block leading-none mt-16 md:mt-24 mr-8 md:mr-16">
+            ぶらりと、
+          </div>
+          <div className="text-4xl md:text-[4.8rem] block leading-none mt-32 md:mt-48 mr-8 md:mr-16">
+            会津手帖。
+          </div>
         </div>
       </main>
 
