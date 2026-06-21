@@ -62,7 +62,7 @@ export default function BlogPage() {
 
   // 2. Markdownパースロジック（imagesに対応）
   const parseMarkdown = (raw) => {
-    const metaMatch = raw.match(/^---\s*([\s\S]*?)\s*---/);
+const metaMatch = raw?.match?.(/^---\s*([\s\S]*?)\s*---/);
     const metaData = {
       date: "",
       title: "",
