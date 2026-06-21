@@ -13,7 +13,7 @@ import { loadDefaultJapaneseParser } from "budoux";
 const parser = loadDefaultJapaneseParser();
 
 const postFiles = import.meta.glob("../article/*.md", {
-  query: "?raw",
+  query: "raw",
   import: "default",
   eager: true,
 });
@@ -125,7 +125,7 @@ export default function BlogPage() {
         const contentStr = isString ? children : (Array.isArray(children) && typeof children[0] === "string" ? children[0] : "");
 
         // 本文中に {image:0} などの記述があれば画像に置換
-if (contentStr?.match?.(/^{image:\d+}$/)) {
+        if (contentStr?.match?.(/^{image:\d+}$/)) {
           const index = parseInt(contentStr.match(/\d+/)[0]);
           const img = gallery[index];
           if (!img) return null;

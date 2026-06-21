@@ -4,7 +4,8 @@ import { User, Tag as TagIcon, ArrowRight, ChevronLeft, ChevronRight } from "luc
 import { loadDefaultJapaneseParser } from "budoux";
 
 const postFiles = import.meta.glob("../article/*.md", {
-  as: "raw",
+  query: "raw",
+  import: "default",
   eager: true,
 });
 
@@ -249,11 +250,10 @@ export default function Home() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-8 h-8 rounded-full text-xs tracking-widest transition-all ${
-                    currentPage === page
+                  className={`w-8 h-8 rounded-full text-xs tracking-widest transition-all ${currentPage === page
                       ? "bg-kusumi-blue text-white"
                       : "text-aizu-sub hover:bg-gray-50"
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>

@@ -38,12 +38,11 @@ export default function MapPage() {
     const markerRefs = useRef({});
 
     // 記事データの自動読み込み
-    const postFiles = useMemo(() => {
-        return import.meta.glob("../article/*.md", {
-            as: "raw",
-            eager: true,
-        });
-    }, []);
+    const postFiles = import.meta.glob("../article/*.md", {
+        query: "raw",
+        import: "default",
+        eager: true,
+    });
 
     const allPostsWithMap = useMemo(() => {
         return Object.keys(postFiles)
@@ -161,8 +160,8 @@ export default function MapPage() {
             {/* 📁 【左側サイドバー】 */}
             <div className={`
                 w-full md:w-[380px] bg-white border-r border-gray-100 flex flex-col flex-shrink-0 z-20 transition-all duration-300 ease-in-out
-                ${viewMode === "list" 
-                    ? "h-[65svh] absolute bottom-0 left-0 rounded-t-2xl shadow-2xl border-t border-gray-100 md:rounded-none md:shadow-none md:border-t-0 md:relative md:h-full" 
+                ${viewMode === "list"
+                    ? "h-[65svh] absolute bottom-0 left-0 rounded-t-2xl shadow-2xl border-t border-gray-100 md:rounded-none md:shadow-none md:border-t-0 md:relative md:h-full"
                     : "hidden md:flex md:h-full"
                 }
             `}>
@@ -179,11 +178,10 @@ export default function MapPage() {
                                     <button
                                         key={tag}
                                         onClick={() => handleTagClick(tag)}
-                                        className={`text-[10px] font-sans px-3 py-1 rounded-sm transition-all duration-300 flex items-center gap-1 ${
-                                            isCurrentTag
+                                        className={`text-[10px] font-sans px-3 py-1 rounded-sm transition-all duration-300 flex items-center gap-1 ${isCurrentTag
                                                 ? "bg-kusumi-blue text-white"
                                                 : "bg-gray-50 text-aizu-gray/70 hover:bg-gray-100/70"
-                                        }`}
+                                            }`}
                                     >
                                         <TagIcon size={8} className={isCurrentTag ? "text-white" : "text-aizu-sub/50"} />
                                         {tag}
@@ -201,11 +199,10 @@ export default function MapPage() {
                         <div
                             key={post.id}
                             onClick={() => handleSpotClick(post)}
-                            className={`p-3.5 rounded-xs border cursor-pointer transition-all duration-300 bg-white ${
-                                selectedPost?.id === post.id
+                            className={`p-3.5 rounded-xs border cursor-pointer transition-all duration-300 bg-white ${selectedPost?.id === post.id
                                     ? "border-kusumi-blue ring-1 ring-kusumi-blue/20 shadow-xs"
                                     : "border-gray-100 hover:border-gray-200 shadow-2xs"
-                            }`}
+                                }`}
                         >
                             <div className="flex gap-4">
                                 {post.thumbnail && (
@@ -293,13 +290,13 @@ export default function MapPage() {
                                         <h4 className="font-serif text-xs text-aizu-gray mb-1 font-bold leading-tight">
                                             {post.locationName || post.title}
                                         </h4>
-                                        
+
                                         {post.address && (
                                             <p className="text-[10px] text-aizu-sub/70 mt-1 mb-2 line-clamp-2 leading-relaxed">
                                                 {post.address}
                                             </p>
                                         )}
-                                        
+
                                         <Link
                                             to={`/blog/${post.id}`}
                                             className="text-[10px] text-kusumi-blue font-bold flex items-center gap-0.5 mt-1.5 no-underline hover:underline"

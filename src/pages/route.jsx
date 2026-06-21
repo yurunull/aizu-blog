@@ -53,16 +53,20 @@ function OptimizedRouting({ waypoints }) {
 export default function RoutePage() {
     const [selectedIds, setSelectedIds] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const postFiles = useMemo(() => import.meta.glob("../article/*.md", { as: "raw", eager: true }), []);
-    
+    const postFiles = import.meta.glob("../article/*.md", {
+        query: "raw",
+        import: "default",
+        eager: true,
+    });
+
     const allPosts = useMemo(() => {
         return Object.entries(postFiles || {}).map(([path, content]) => {
             const id = path.split("/").pop().replace(/\.md$/, "");
             const metaMatch = content.match(/^---\s*([\s\S]*?)\s*---/);
-            
+
             // 記事データの初期構造定義 (locationName, tags, lovePoints を追加)
             const data = { id, title: "無題", locationName: "", tags: "", lovePoints: "", location: null, address: "", memo: "" };
-            
+
             if (metaMatch) {
                 metaMatch[1].split("\n").forEach(line => {
                     const [k, ...v] = line.split(":");
@@ -99,29 +103,29 @@ export default function RoutePage() {
                 <div className="p-6 border-b border-gray-100">
                     <h2 className="text-xl font-serif font-bold text-[#333333] mb-2">ルート作成</h2>
                     <p className="text-xs text-gray-400 mb-4">※表示されるルートは目安です(車で行くことを仮定しています)<br />参考程度にご利用ください。</p>
-                    
+
                     <div className="relative flex items-center">
-                        <input 
-                            className="w-full pl-10 pr-4 py-2 bg-[#F9F9F9] rounded-xl border border-gray-100 outline-none text-sm transition-all focus:border-[#87A7B3] focus:bg-white" 
-                            placeholder="店名やスポット名で検索..." 
+                        <input
+                            className="w-full pl-10 pr-4 py-2 bg-[#F9F9F9] rounded-xl border border-gray-100 outline-none text-sm transition-all focus:border-[#87A7B3] focus:bg-white"
+                            placeholder="店名やスポット名で検索..."
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)} 
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <Search className="absolute left-3 w-4 h-4 text-gray-400" />
                     </div>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                    
+
                     {/* 選択中のスポット（ピン留めエリア） */}
                     {selectedPosts.length > 0 && !searchTerm && (
                         <div className="space-y-2">
                             <span className="text-xs font-bold text-[#87A7B3] tracking-wider uppercase">選択中のスポット ({selectedPosts.length})</span>
                             <div className="space-y-2">
                                 {selectedPosts.map(post => (
-                                    <div key={`selected-${post.id}`} 
-                                         onClick={() => setSelectedIds(prev => prev.filter(id => id !== post.id))}
-                                         className="p-3 rounded-xl border border-[#87A7B3] bg-[#87A7B3]/10 cursor-pointer flex justify-between items-center transition-all hover:bg-[#87A7B3]/20">
+                                    <div key={`selected-${post.id}`}
+                                        onClick={() => setSelectedIds(prev => prev.filter(id => id !== post.id))}
+                                        className="p-3 rounded-xl border border-[#87A7B3] bg-[#87A7B3]/10 cursor-pointer flex justify-between items-center transition-all hover:bg-[#87A7B3]/20">
                                         <div>
                                             <span className="font-bold text-sm text-[#333333]">{getDisplayName(post)}</span>
                                         </div>
@@ -138,7 +142,7 @@ export default function RoutePage() {
                         <span className="text-xs font-bold text-gray-400 tracking-wider uppercase">
                             {searchTerm ? "検索結果" : "スポット候補一覧"}
                         </span>
-                        
+
                         <div className="space-y-2">
                             {allPosts
                                 .filter(p => getDisplayName(p).toLowerCase().includes(searchTerm.toLowerCase()) || p.tags.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -150,23 +154,22 @@ export default function RoutePage() {
                                     const firstPoint = getFirstLovePoint(post.lovePoints);
 
                                     return (
-                                        <div key={post.id} 
-                                             onClick={() => setSelectedIds(prev => isSelected ? prev.filter(id => id !== post.id) : [...prev, post.id])} 
-                                             className={`p-4 rounded-xl border cursor-pointer transition-all ${
-                                                 isSelected 
-                                                     ? "border-[#87A7B3] bg-[#87A7B3]/10" 
-                                                     : "border-gray-100 bg-white hover:border-gray-300"
-                                             }`}>
+                                        <div key={post.id}
+                                            onClick={() => setSelectedIds(prev => isSelected ? prev.filter(id => id !== post.id) : [...prev, post.id])}
+                                            className={`p-4 rounded-xl border cursor-pointer transition-all ${isSelected
+                                                    ? "border-[#87A7B3] bg-[#87A7B3]/10"
+                                                    : "border-gray-100 bg-white hover:border-gray-300"
+                                                }`}>
                                             <div className="flex justify-between items-start gap-2">
                                                 <div>
                                                     {/* 店名 */}
                                                     <span className="font-bold text-base text-[#333333] block">{getDisplayName(post)}</span>
-                                                    
+
                                                     {/* おすすめポイントのチラ見せ */}
                                                     {firstPoint && (
                                                         <p className="text-xs text-gray-500 mt-1 line-clamp-1">📌 {firstPoint}</p>
                                                     )}
-                                                    
+
                                                     {/* タグ表示 */}
                                                     {tags.length > 0 && (
                                                         <div className="flex flex-wrap gap-1 mt-2">
@@ -178,7 +181,7 @@ export default function RoutePage() {
                                                         </div>
                                                     )}
                                                 </div>
-                                                
+
                                                 {/* 追加ボタン */}
                                                 {!isSelected && (
                                                     <span className="text-xs text-[#87A7B3] font-bold border border-[#87A7B3]/30 px-2 py-1 rounded-lg bg-[#87A7B3]/5 shrink-0 hover:bg-[#87A7B3]/20">
@@ -197,14 +200,14 @@ export default function RoutePage() {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="p-6 border-t border-gray-100 bg-white">
                     <button onClick={() => window.print()} className="w-full py-3 bg-[#333333] text-white rounded-xl font-bold hover:bg-[#87A7B3] transition-colors hover:shadow-lg">
                         PDFで保存（印刷画面へ）
                     </button>
                 </div>
             </div>
-            
+
             <div className="flex-1 relative print:hidden">
                 <MapContainer center={AIZU_WAKAMATSU_STATION} zoom={15} className="w-full h-full">
                     <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
@@ -216,7 +219,7 @@ export default function RoutePage() {
             <div className="hidden print:block p-8 w-full">
                 <h1 className="text-2xl font-bold mb-2">会津観光ルート計画</h1>
                 <p className="text-sm text-gray-500 mb-6">※本ルートは徒歩用の最短経路目安です。参考程度にご利用ください。</p>
-                
+
                 <div className="space-y-6">
                     {optimizedPosts.map((post, i) => (
                         <div key={post.id} className="border-b border-gray-100 pb-4 last:border-none">
