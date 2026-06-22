@@ -118,7 +118,7 @@ export default function Home() {
  return (
     <div className="bg-aizu-white min-h-screen">
       {/* 1. メインビジュアル (PCでのサイズ拡大・位置ズレの完全修正) */}
-      <main className="h-[75vh] min-h-[550px] w-full flex justify-center items-center relative pt-12">
+     <main className="h-[48vh] min-h-[350px] w-full flex justify-center items-center relative pt-26 md:pt-24">
         <div 
           className="font-serif font-extralight text-aizu-gray tracking-[0.3em] relative"
           style={{
@@ -127,28 +127,25 @@ export default function Home() {
             whiteSpace: "nowrap",
           }}
         >
-          {/* PC（md以上）でのサイズを [4.8rem] まで大きく確保！
-            flexを使わず、各要素の margin-top (mt) で完璧に階段状のスタート位置を制御します
-          */}
-          <div className="text-4xl md:text-[4.8rem] block leading-none">
+          <div className="text-4xl md:text-[3.8rem] block leading-none">
             ゆるり、
           </div>
-          <div className="text-4xl md:text-[4.8rem] block leading-none mt-16 md:mt-24 mr-8 md:mr-16">
+          <div className="text-4xl md:text-[3.8rem] block leading-none mt-8 md:mt-12 mr-8 md:mr-16">
             ぶらりと、
           </div>
-          <div className="text-4xl md:text-[4.8rem] block leading-none mt-32 md:mt-48 mr-8 md:mr-16">
+          <div className="text-4xl md:text-[3.8rem] block leading-none mt-16 md:mt-24 mr-8 md:mr-16">
             会津手帖。
           </div>
         </div>
       </main>
 
       {/* 2. スライドショー */}
-      <section className="py-24 overflow-hidden">
+     <section className="py-12 md:py-16 overflow-hidden">
         <div className="flex animate-infinite-scroll">
           {[...allPostsData, ...allPostsData].map((post, index) => (
             <div
               key={`${post.id}-${index}`}
-              className="w-[280px] md:w-[400px] flex-shrink-0 px-3 md:px-6"
+              className="w-[280px] md:w-[300px] flex-shrink-0 px-3 md:px-6"
             >
               <Link to={`/blog/${post.id}`} className="group block">
                 <div className="aspect-[16/10] overflow-hidden bg-gray-100 rounded-sm mb-4">
@@ -199,33 +196,34 @@ export default function Home() {
         </div>
 
         {/* 4. 記事一覧グリッド（filteredPosts から currentPosts に変更） */}
-        <div className="max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+       <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
           {currentPosts.map((post) => (
-            <Link key={post.id} to={`/blog/${post.id}`} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden mb-6 rounded-sm">
+            <Link key={post.id} to={`/blog/${post.id}`} className="group block">
+              {/* 💡 aspect-[4/5]（縦長）から aspect-[16/10]（横長）に変更して高さを抑えました */}
+              <div className="relative aspect-[16/10] overflow-hidden mb-4 rounded-sm bg-gray-50">
                 <img
                   src={post.thumbnail}
                   alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors" />
               </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-4 text-[10px] tracking-widest text-aizu-sub/50 uppercase">
+              <div className="space-y-2">
+                <div className="flex items-center gap-3 text-[10px] tracking-widest text-aizu-sub/50 uppercase">
                   <span>{post.date}</span>
-                  <span className="w-4 h-[1px] bg-gray-200"></span>
+                  <span className="w-3 h-[1px] bg-gray-200"></span>
                 </div>
-                <h4 className="text-xl font-serif text-aizu-gray leading-snug group-hover:text-kusumi-blue transition-colors">
+                <h4 className="text-sm font-serif text-aizu-gray leading-relaxed group-hover:text-kusumi-blue transition-colors">
                   <BudouxText text={post.title} />
                 </h4>
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div className="flex flex-wrap gap-2 pt-0.5">
                   {post.tags.map((t) => (
                     <span key={t} className="text-[9px] text-aizu-sub/40 italic">
-                      {t}
+                      #{t}
                     </span>
                   ))}
                 </div>
-                <div className="pt-2 flex items-center gap-2 text-[10px] text-kusumi-blue font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="pt-1 flex items-center gap-2 text-[10px] text-kusumi-blue font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
                   Read More <ArrowRight size={12} />
                 </div>
               </div>

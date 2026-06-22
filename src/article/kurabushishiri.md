@@ -2,7 +2,7 @@
 date: 2025.04.16
 title: "会津若松で「パンケーキ」といえば、迷わずここ！"
 locationName: "クラブシシリーカフェ"
-images: "images/sisiri-.jpg|"
+images: "/images/sisiri-.jpg|"
 # links (複数形) にして、名前|URL の形式にする
 links: "Instagram|https://www.instagram.com/clubsicilycafe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
 # Googleマップの「共有」→「地図を埋め込む」の src の中身を入れる

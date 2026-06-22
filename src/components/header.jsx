@@ -31,7 +31,7 @@ export default function Header() {
     
     <Link
       to="/"
-      className="block h-full w-32 md:w-48 transition-opacity hover:opacity-70 flex-shrink-0"
+     className="block h-full w-24 md:w-32 transition-opacity hover:opacity-70 flex-shrink-0"
     >
       <img
         src={`${import.meta.env.BASE_URL}images/logo.png`}

@@ -7,6 +7,7 @@ import Home from "./pages/home.jsx"; // App から Home に名前を分かりや
 import Blog from "./pages/blog.jsx";
 import Map from "./pages/map.jsx"
 import Mitinori from "./pages/route.jsx"
+import ScrollToTop from "./pages/ScrollToTop.jsx";
 import Footer from "./components/footer.jsx";
 
 
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       {/* 全ページ共通のヘッダー */}
       <Header />
+      <ScrollToTop />
 
       <Routes>
         {/* トップページ */}

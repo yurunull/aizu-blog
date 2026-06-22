@@ -2,7 +2,7 @@
 date: 2026.04.19
 title: "安くてお腹いっぱいラーメンセット！！"
 locationName: "ラーメン関さん"
-images : "images/sekisann.jpg"
+images : "/images/sekisann.jpg"
 # links (複数形) にして、名前|URL の形式にする
 links:
 mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.623592836118!2d139.92480107587036!3d37.49320797205762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff5549f6668d6ef%3A0x5b05c7eb59776cf2!2z44Op44O844Oh44Oz6Zai44GV44KT!5e0!3m2!1sja!2sjp!4v1778459752773!5m2!1sja!2sjp"

@@ -2,7 +2,7 @@
 date: 2025.11.12
 title: "ご褒美ケーキいっぱい食べるならここ！"
 locationName: "Sweets&DeliDeco"
-images: "images/Deco.jpg|"
+images: "/images/Deco.jpg|"
 # links (複数形) にして、名前|URL の形式にする
 links: "Instagram|https://www.instagram.com/deco_newpalace?igsh=MXkxeDZ1dXRrMjN6Zg=="
 # Googleマップの「共有」→「地図を埋め込む」の src の中身を入れる

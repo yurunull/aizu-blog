@@ -2,7 +2,7 @@
 date: 2025.10.23
 title: "幸せのコーヒータイム☕"
 locationName: "PonoLea Coffee"
-images : "images/PonoLea.jpg |"
+images : "/images/PonoLea.jpg |"
 # links (複数形) にして、名前|URL の形式にする
 links: "公式ブログ|https://www.gurutto-aizu.com/detail/1025/index.html"
 mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.4810938044047!2d139.9245562758705!3d37.49656987205688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff553e5abd87c13%3A0x99485a6004fd7e49!2sPonoLeaCoffee!5e0!3m2!1sja!2sjp!4v1776499195487!5m2!1sja!2sjp" 

@@ -2,7 +2,7 @@
 date: 2025.09.12
 title: "あいづ浪漫亭 しおぐら"
 locationName: "あいづ浪漫亭 しおぐら"
-images : "images/siogura.jpg"
+images : "/images/siogura.jpg"
 # links (複数形) にして、名前|URL の形式にする
 links: "公式サイト|https://aizuromantei-shiogura.com/"
 # Googleマップの「共有」→「地図を埋め込む」の src の中身を入れる

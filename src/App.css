@@ -8,6 +8,11 @@
   transition: border-color 0.3s;
   margin-bottom: 24px;
 
+  /* leaflet-routing-machineのパネルを非表示にする */
+.leaflet-routing-container {
+  display: none !important;
+}
+
   &:hover {
     border-color: var(--accent-border);
   }
