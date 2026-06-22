@@ -4,7 +4,8 @@ import { plugin as markdown } from "vite-plugin-markdown";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? "/aizu-blog/" : "/",
+  // Cloudflare Pages用にベースパスを常に "/" に固定します
+  base: "/",
   plugins: [
     react(),
     markdown({ mode: ['html', 'toc'] })
