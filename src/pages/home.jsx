@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { User, Tag as TagIcon, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"; // アイコンを追加
 import { loadDefaultJapaneseParser } from "budoux";
@@ -68,6 +68,20 @@ export default function Home() {
     return Array.from(new Set(tags));
   }, [allPostsData]);
 
+  // 記事セクションの位置を捕捉するためのRef
+  const postSectionRef = useRef(null);
+
+  // ページ切り替え時に記事セクションの先頭へ自動スクロール
+  useEffect(() => {
+    // 2ページ目以降に切り替わった時だけスクロールさせる（初回読み込み時の誤作動防止）
+    if (currentPage > 1 && postSectionRef.current) {
+      postSectionRef.current.scrollIntoView({
+        behavior: "smooth", // ぬるっと動かす
+        block: "start",    // セクションの先頭を画面のトップに合わせる
+      });
+    }
+  }, [currentPage]);
+
   // タグでフィルタリングされた記事
   const filteredPosts = useMemo(() => {
     if (!selectedTag) return allPostsData;
@@ -115,11 +129,11 @@ export default function Home() {
     );
   };
 
- return (
+  return (
     <div className="bg-aizu-white min-h-screen">
       {/* 1. メインビジュアル (PCでのサイズ拡大・位置ズレの完全修正) */}
-     <main className="h-[48vh] min-h-[350px] w-full flex justify-center items-center relative pt-26 md:pt-24">
-        <div 
+      <main className="h-[48vh] min-h-[350px] w-full flex justify-center items-center relative pt-26 md:pt-24">
+        <div
           className="font-serif font-extralight text-aizu-gray tracking-[0.3em] relative"
           style={{
             writingMode: "vertical-rl",
@@ -140,7 +154,7 @@ export default function Home() {
       </main>
 
       {/* 2. スライドショー */}
-     <section className="py-12 md:py-16 overflow-hidden">
+      <section className="py-12 md:py-16 overflow-hidden">
         <div className="flex animate-infinite-scroll">
           {[...allPostsData, ...allPostsData].map((post, index) => (
             <div
@@ -167,15 +181,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. タグ選択セクション */}
-      <section className="bg-white py-20 px-6 border-t border-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* 3. タグ選択・記事一覧セクション（巨大回転文字を背景に配置するため、section全体を relative・overflow-hidden に） */}
+      <section ref={postSectionRef} className="bg-white py-20 px-6 border-t border-gray-50 relative overflow-hidden min-h-[600px]">
+
+        {/* 🎡 背景でダイナミックに回転する巨大円形テキスト */}
+        {/* 右下（または右上）に大胆にはみ出させ、opacityを極限まで下げることでモダンな誌面のようなデザインに */}
+        <div className="absolute -bottom-32 -right-32 md:-bottom-48 md:-right-48 w-[24rem] h-[24rem] md:w-[35rem] md:h-[35rem] pointer-events-none select-none animate-spin-slow z-0">
+          <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+            <path
+              id="textPath"
+              d="M 50,50 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
+              fill="none"
+            />
+
+            <text className="text-[5.5px] font-sans font-light tracking-[0.35em] fill-kusumi-blue/15 uppercase">
+              <textPath href="#textPath" startOffset="0%">
+                BRARI YURURI DIARY FROM AIZU 🐾 SLOW WANDERING DIARY 🐾 {"\u00A0\u00A0"}
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        {/* 💡 コンテンツ全体を z-10 にして、回転文字の「前面」に浮き上がらせる */}
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="flex items-center justify-center gap-2 text-kusumi-green mb-8">
             <TagIcon size={16} />
             <span className="text-[10px] font-bold tracking-[0.4em] uppercase">
               Filter by Tags
             </span>
           </div>
+
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => setSelectedTag(null)}
@@ -195,12 +230,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 4. 記事一覧グリッド（filteredPosts から currentPosts に変更） */}
-       <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+        {/* 4. 記事一覧グリッド（ここも z-10 を追加して回転文字の上に重ねる） */}
+        <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 relative z-10">
           {currentPosts.map((post) => (
             <Link key={post.id} to={`/blog/${post.id}`} className="group block">
-              {/* 💡 aspect-[4/5]（縦長）から aspect-[16/10]（横長）に変更して高さを抑えました */}
-              <div className="relative aspect-[16/10] overflow-hidden mb-4 rounded-sm bg-gray-50">
+              <div className="relative aspect-[16/10] overflow-hidden mb-4 rounded-sm bg-gray-50 shadow-sm">
                 <img
                   src={post.thumbnail}
                   alt={post.title}
@@ -285,6 +319,13 @@ export default function Home() {
           width: max-content;
           animation: infinite-scroll 80s linear infinite;
         }
+          @keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin 15s linear infinite;
+}
       `}</style>
     </div>
   );

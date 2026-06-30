@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { Helmet } from 'react-helmet-async';
 import {
   Heart,
   MapPin,
